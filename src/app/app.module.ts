@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeModule } from './pages/home/home.module';
+import { BookmarksModule } from './pages/bookmarks/bookmarks.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HomeModule,
+    BookmarksModule
   ],
   providers: [],
   bootstrap: [AppComponent]
