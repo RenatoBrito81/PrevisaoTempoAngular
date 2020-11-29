@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HomePage } from './home.page';
+import { StoreModule } from '@ngrx/store';
+
+import { homeReducer } from './state/home.reducer';
 
 @NgModule({
   declarations: [HomePage],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('home', homeReducer)
   ]
 })
 export class HomeModule { }
