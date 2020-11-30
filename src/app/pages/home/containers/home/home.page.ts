@@ -10,6 +10,7 @@ import { CityWeather } from 'src/app/shared/models/weather.model';
 
 import * as fromHomeActions from '../../state/home.actions';
 import * as fromHomeSelectors from '../../state/home.selectors';
+import * as fromBookmarkSelectors from '../../../bookmarks/state/bookmarks.selectors';
 
 @Component({
   selector: 'app-home',
@@ -46,6 +47,7 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.componentDestroyed$.next();
     this.componentDestroyed$.unsubscribe();
+    this.store.dispatch(fromHomeActions.clearHomeState());
   }
 
   doSearch(): void {
@@ -59,5 +61,7 @@ export class HomePage implements OnInit, OnDestroy {
     bookmark.name = this.cityWeather.city.name;
     bookmark.country = this.cityWeather.city.country;
     bookmark.coord = this.cityWeather.city.coord;
+
+    this.store.dispatch(fromHomeActions.toggleBookmark({entity: bookmark}));
   }
 }
