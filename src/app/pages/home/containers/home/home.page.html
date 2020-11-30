@@ -17,6 +17,17 @@
       </div>
   
     </div>
+
+    <app-loader *ngIf="loading$ | async"></app-loader>
+
+    <div *ngIf="!(loading$ | async) && !(error$ | async) && !!cityWeather">
+      <app-current-weather [cityWeather]="cityWeather"
+                           (toggleBookmark)="onToggleBookmark()"></app-current-weather>
+    </div>
+
+    <div *ngIf="!(loading$ | async) && error$ | async">
+      <a>Tentar Novamente</a>
+    </div>
   
   </div>
   

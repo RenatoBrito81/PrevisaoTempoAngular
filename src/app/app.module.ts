@@ -12,6 +12,7 @@ import { BookmarksModule } from './pages/bookmarks/bookmarks.module';
 
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,10 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule,
     HomeModule,
+    
     BookmarksModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
