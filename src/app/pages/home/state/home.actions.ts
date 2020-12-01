@@ -6,7 +6,12 @@ export const loadCurrentWeather = createAction(
     props<{ query: string}>()
 );
 
-export const loadCurrentWeatherSucess = createAction(
+export const loadCurrentWeatherById = createAction(
+    '[Home] Load Current Weather By Id',
+    props<{ id: string }>(),
+  );
+
+export const loadCurrentWeatherSuccess = createAction(
     '[Weather API] Load Current Weather Sucess',
     props<{ entity: any}>()
 );

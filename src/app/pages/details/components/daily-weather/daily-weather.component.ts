@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DailyWeather, Weather } from 'src/app/shared/models/weather.model';
 
 import * as moment from 'moment-timezone';
@@ -6,7 +6,8 @@ import * as moment from 'moment-timezone';
 @Component({
   selector: 'app-daily-weather',
   templateUrl: './daily-weather.component.html',
-  styleUrls: ['./daily-weather.component.scss']
+  styleUrls: ['./daily-weather.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DailyWeatherComponent {
 

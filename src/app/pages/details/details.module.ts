@@ -12,10 +12,11 @@ import { DetailsEffects } from './state/details.effects';
 import { detailsReducer } from './state/details.reducer';
 import { DailyWeatherComponent } from './components/daily-weather/daily-weather.component';
 
-
-
 @NgModule({
-  declarations: [DetailsPage, DailyWeatherComponent],
+  declarations: [
+    DetailsPage,
+    DailyWeatherComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

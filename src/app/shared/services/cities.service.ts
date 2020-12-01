@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-//*** import * as jsSearch from 'js-search';
+import * as jsSearch from 'js-search';
 
 import { CityTypeaheadItem } from '../models/city-typeahead-item.model';
 
@@ -14,8 +14,7 @@ export class CitiesService {
 
   constructor(private http: HttpClient) { }
 
-  //***
-  /*getCities(query: string): Observable<CityTypeaheadItem[]> {
+  getCities(query: string): Observable<CityTypeaheadItem[]> {
     return this.http.get<{country: string}[]>('assets/db/cities.json')
       .pipe(
         map(cities => {
@@ -26,5 +25,5 @@ export class CitiesService {
           return search.search(query);
         }),
       );
-  }*/
+  }
 }

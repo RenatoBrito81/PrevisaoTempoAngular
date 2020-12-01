@@ -9,6 +9,7 @@ import { Weather } from '../../models/weather.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailedWeatherComponent {
+  
   @Input() weather: Weather;
 
   get weatherIcon(): string {
