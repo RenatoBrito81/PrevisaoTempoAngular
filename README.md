@@ -9,6 +9,10 @@
 
 ### Execução
 
+- Deve-se efetuar o cadastro do site do Open Weather e copiar a ApiKey gerada.
+
+- Em seguida deve-se copiar a ApiKey no arquivo environment.ts localizado no diretório Enviroments.
+
 - Para executar o app, deve-se executar primeiro o **npm i** para a instalação dos pacotes de dependência.
 
 - Em seguinda executar o comando para executar o app **ng s**.
