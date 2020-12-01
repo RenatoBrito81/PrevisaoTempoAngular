@@ -24,6 +24,6 @@ export class BookmarksPage implements OnInit {
   }
 
   removeBookmark(id: number) {
-    this.store.dispatch(fromBookmarksActions.removeBookmark({ id }));
+    this.store.dispatch(fromBookmarksActions.removeBookmark({id}));
   }
 }

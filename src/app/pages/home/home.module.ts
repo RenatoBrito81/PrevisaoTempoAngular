@@ -10,12 +10,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { HomeEffects } from './state/home.effects';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { CurrentWeatherComponent } from './components/current-weather/current-weather.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [HomePage, CurrentWeatherComponent],
+  declarations: [
+    HomePage,
+    CurrentWeatherComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     StoreModule.forFeature('home', homeReducer),
     EffectsModule.forFeature([HomeEffects]),
     ComponentsModule

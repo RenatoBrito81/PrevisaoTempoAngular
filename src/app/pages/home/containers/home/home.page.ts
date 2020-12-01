@@ -2,15 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { select, Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { Bookmark } from 'src/app/shared/models/bookmark.model';
 import { CityWeather } from 'src/app/shared/models/weather.model';
 
 import * as fromHomeActions from '../../state/home.actions';
 import * as fromHomeSelectors from '../../state/home.selectors';
-import * as fromBookmarkSelectors from '../../../bookmarks/state/bookmarks.selectors';
+import * as fromBookmarksSelectors from '../../../bookmarks/state/bookmarks.selectors';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +19,13 @@ import * as fromBookmarkSelectors from '../../../bookmarks/state/bookmarks.selec
 })
 export class HomePage implements OnInit, OnDestroy {
 
+  cityWeather$: Observable<CityWeather>;
   cityWeather: CityWeather;
   loading$: Observable<boolean>;
   error$: Observable<boolean>;
+
+  bookmarksList$: Observable<Bookmark[]>;
+  isCurrentFavorite$: Observable<boolean>;
 
   searchControl: FormControl;
   text: string;
@@ -33,15 +37,24 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchControl = new FormControl('', Validators.required);
 
-    this.store
-      .pipe(
-        select(fromHomeSelectors.selectCurrentWeather),
-        takeUntil(this.componentDestroyed$)
-      )
-      .subscribe(response => this.cityWeather = response);
-
+    this.cityWeather$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeather));
+    this.cityWeather$
+      .pipe(takeUntil(this.componentDestroyed$))
+      .subscribe(value => this.cityWeather = value);
     this.loading$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeatherLoading));
     this.error$ = this.store.pipe(select(fromHomeSelectors.selectCurrentWeatherError));
+
+    this.bookmarksList$ = this.store.pipe(select(fromBookmarksSelectors.selectBookmarksList));
+
+    this.isCurrentFavorite$ = combineLatest([this.cityWeather$, this.bookmarksList$])
+      .pipe(
+        map(([current, bookmarksList]) => {
+          if (!!current) {
+            return bookmarksList.some(bookmark => bookmark.id === current.city.id);
+          }
+          return false;
+        }),
+      );
   }
 
   ngOnDestroy(): void {
