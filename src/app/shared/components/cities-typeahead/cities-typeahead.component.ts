@@ -32,7 +32,7 @@ export class CitiesTypeaheadComponent implements OnInit, ControlValueAccessor {
     )
     .pipe(
       switchMap((query: string) => this.citiesService.getCities(query))
-    )
+    );
   }
 
   onSelected(match: TypeaheadMatch) {
